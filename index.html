@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$TORO — The Community Bull</title>
+<meta name="description" content="$TORO is the Community Bull. 65% of supply locked and airdropped to holders as the market cap climbs. The community decides when the bull runs." />
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="$TORO — The Community Bull" />
+<meta property="og:description" content="The community bull. Supply unlocks and airdrops to holders as market cap milestones are hit." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/hero-banner.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐂</text></svg>" />
+
+<!-- Fonts: condensed, aggressive display type -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --red:      #e01414;
+    --red-dim:  #9c0f0f;
+    --red-glow: rgba(224, 20, 20, 0.55);
+    --black:    #070404;
+    --panel:    #120a0a;
+    --panel-2:  #1c0e0e;
+    --ash:      #b9a9a5;
+    --bone:     #efe6e2;
+    --line:     rgba(224, 20, 20, 0.22);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--bone);
+    font-family: 'Oswald', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Anton', system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { width: min(1140px, 92vw); margin-inline: auto; }
+
+  .red { color: var(--red); }
+  .glow-text { text-shadow: 0 0 18px var(--red-glow), 0 0 40px rgba(224,20,20,0.25); }
+
+  /* ---------- background ambience ---------- */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(224,20,20,0.14), transparent 60%),
+      radial-gradient(800px 500px at 100% 100%, rgba(156,15,15,0.10), transparent 60%),
+      var(--black);
+    z-index: -2;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23ffffff' opacity='0.02'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(7, 4, 4, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .brand .bull { filter: drop-shadow(0 0 6px var(--red-glow)); }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--ash); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links .btn { color: #fff; }
+  @media (max-width: 860px) { .nav-links a:not(.btn) { display: none; } }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(180deg, var(--red), var(--red-dim));
+    color: #fff; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 0.7rem 1.4rem; border-radius: 4px; border: 1px solid rgba(255,120,120,0.3);
+    box-shadow: 0 0 0 rgba(224,20,20,0.0);
+    transition: transform 0.15s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--red-glow); }
+  .btn.ghost {
+    background: transparent; border: 1px solid var(--line); color: var(--bone);
+    box-shadow: none;
+  }
+  .btn.ghost:hover { border-color: var(--red); box-shadow: 0 0 24px rgba(224,20,20,0.25); }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    position: relative;
+    padding: 4.5rem 0 5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-banner {
+    width: min(720px, 90vw);
+    margin: 0 auto 2rem;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 0 60px rgba(224,20,20,0.35), inset 0 0 40px rgba(0,0,0,0.6);
+    border: 1px solid var(--line);
+  }
+  .hero-banner-fallback {
+    width: min(720px, 90vw); aspect-ratio: 680 / 267;
+    margin: 0 auto 2rem;
+    border-radius: 10px; border: 1px dashed var(--line);
+    display: grid; place-content: center; gap: .4rem;
+    background:
+      radial-gradient(400px 200px at 50% 40%, rgba(224,20,20,0.25), transparent),
+      linear-gradient(180deg, #1a0808, #070404);
+    color: var(--ash);
+  }
+  .hero-banner-fallback .big { font-size: clamp(2.5rem, 9vw, 6rem); }
+  .hero h1 {
+    font-size: clamp(3rem, 11vw, 8rem);
+    line-height: 0.92;
+  }
+  .hero h1 .sub { display: block; font-size: 0.42em; color: var(--ash); letter-spacing: 0.35em; margin-top: 0.6rem; }
+  .tagline {
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+    color: var(--ash); font-weight: 300;
+    max-width: 640px; margin: 1.4rem auto 2rem;
+  }
+  .tagline strong { color: var(--bone); font-weight: 500; }
+
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* contract address bar */
+  .ca-bar {
+    margin: 2.4rem auto 0;
+    max-width: 560px;
+    display: flex; align-items: stretch;
+    border: 1px solid var(--line); border-radius: 6px;
+    background: rgba(0,0,0,0.4); overflow: hidden;
+  }
+  .ca-bar .label {
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ash); padding: 0 0.9rem; display: grid; place-content: center;
+    background: rgba(224,20,20,0.08); border-right: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .ca-bar code {
+    flex: 1; font-family: 'Oswald', monospace; font-size: 0.85rem;
+    color: var(--bone); padding: 0.85rem 0.9rem;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    align-self: center; text-align: left;
+  }
+  .ca-bar button {
+    background: var(--red); color: #fff; border: none; cursor: pointer;
+    padding: 0 1.2rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    font-size: 0.75rem; transition: background 0.2s;
+  }
+  .ca-bar button:hover { background: var(--red-dim); }
+
+  /* ---------- sections ---------- */
+  section { padding: 5.5rem 0; position: relative; }
+  .eyebrow {
+    color: var(--red); letter-spacing: 0.28em; text-transform: uppercase;
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 0.8rem;
+  }
+  .section-title { font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 1rem; }
+  .section-lead { color: var(--ash); max-width: 620px; font-size: 1.08rem; }
+  .center { text-align: center; margin-inline: auto; }
+  .center .section-lead { margin-inline: auto; }
+
+  /* the story: three bulls */
+  .bulls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3rem; }
+  @media (max-width: 820px) { .bulls { grid-template-columns: 1fr; } }
+  .bull-card {
+    background: linear-gradient(180deg, var(--panel), var(--black));
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 2rem 1.6rem; text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .bull-card:hover { transform: translateY(-4px); border-color: var(--red); }
+  .bull-card .emoji { font-size: 3rem; display: block; margin-bottom: 0.8rem; }
+  .bull-card.highlight { border-color: var(--red); box-shadow: 0 0 40px rgba(224,20,20,0.2); }
+  .bull-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .bull-card p { color: var(--ash); font-size: 0.98rem; }
+  .bull-card .flaw { color: var(--red); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.8rem; display:block; }
+
+  /* how it works */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3rem; }
+  @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    border: 1px solid var(--line); border-radius: 10px; padding: 1.8rem;
+    background: rgba(18,10,10,0.5);
+  }
+  .step .num {
+    font-family: 'Anton', sans-serif; font-size: 2.4rem; color: var(--red);
+    line-height: 1; margin-bottom: 0.6rem; display: block;
+  }
+  .step h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .step p { color: var(--ash); font-size: 0.95rem; }
+
+  /* ---------- unlock ladder ---------- */
+  #unlocks { background: linear-gradient(180deg, transparent, rgba(28,14,14,0.4), transparent); }
+  .ladder { margin-top: 3rem; display: flex; flex-direction: column; gap: 0.9rem; }
+  .rung {
+    display: grid; grid-template-columns: 130px 1fr 70px; align-items: center; gap: 1.2rem;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 1rem 1.4rem; transition: border-color 0.2s, transform 0.2s;
+  }
+  .rung:hover { border-color: var(--red); transform: translateX(4px); }
+  .rung .mc { font-family: 'Anton', sans-serif; font-size: 1.5rem; color: var(--bone); }
+  .rung .bar-track { height: 12px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+  .rung .bar-fill {
+    height: 100%; border-radius: 10px;
+    background: linear-gradient(90deg, var(--red-dim), var(--red));
+    box-shadow: 0 0 14px var(--red-glow);
+    width: 0; transition: width 1.1s cubic-bezier(.2,.7,.2,1);
+  }
+  .rung .pct { font-family: 'Anton', sans-serif; font-size: 1.4rem; color: var(--red); text-align: right; }
+  @media (max-width: 620px) {
+    .rung { grid-template-columns: 90px 1fr 52px; gap: 0.7rem; padding: 0.8rem 1rem; }
+    .rung .mc { font-size: 1.1rem; }
+    .rung .pct { font-size: 1.1rem; }
+  }
+  .ladder-total {
+    margin-top: 1.6rem; text-align: center; color: var(--ash); font-size: 1.05rem;
+  }
+  .ladder-total strong { color: var(--red); font-family: 'Anton', sans-serif; font-size: 1.3rem; }
+
+  /* ---------- tokenomics ---------- */
+  .tok-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem; margin-top: 3rem; align-items: center; }
+  @media (max-width: 820px) { .tok-grid { grid-template-columns: 1fr; } }
+  .tok-stats { display: grid; gap: 1rem; }
+  .tok-stat {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--line); padding: 1rem 0.2rem;
+  }
+  .tok-stat .k { color: var(--ash); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; }
+  .tok-stat .v { font-family: 'Anton', sans-serif; font-size: 1.5rem; }
+  .donut-wrap { display: grid; place-content: center; }
+  .donut {
+    width: 260px; height: 260px; border-radius: 50%;
+    background: conic-gradient(var(--red) 0 65%, #3a1414 65% 90%, #241010 90% 100%);
+    display: grid; place-content: center; position: relative;
+    box-shadow: 0 0 50px rgba(224,20,20,0.25);
+  }
+  .donut::before {
+    content: ""; position: absolute; inset: 34px; border-radius: 50%;
+    background: var(--black); border: 1px solid var(--line);
+  }
+  .donut .center-lbl { position: relative; text-align: center; }
+  .donut .center-lbl .big { font-family: 'Anton', sans-serif; font-size: 2.6rem; color: var(--red); }
+  .donut .center-lbl .small { color: var(--ash); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .legend { display: flex; gap: 1.2rem; justify-content: center; margin-top: 1.4rem; flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--ash); }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  /* ---------- how to buy ---------- */
+  .buy-steps { counter-reset: b; display: grid; gap: 1rem; margin-top: 3rem; }
+  .buy-step {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    background: rgba(18,10,10,0.5); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.4rem 1.6rem;
+  }
+  .buy-step::before {
+    counter-increment: b; content: counter(b);
+    font-family: 'Anton', sans-serif; font-size: 1.4rem; color: #fff;
+    background: var(--red); min-width: 44px; height: 44px; border-radius: 50%;
+    display: grid; place-content: center; box-shadow: 0 0 20px var(--red-glow);
+  }
+  .buy-step h3 { font-size: 1.15rem; margin-bottom: 0.2rem; }
+  .buy-step p { color: var(--ash); font-size: 0.95rem; }
+  .buy-step a { color: var(--red); border-bottom: 1px dotted var(--red); }
+
+  /* ---------- meme arsenal ---------- */
+  .meme-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.4rem; margin-top: 3rem;
+  }
+  .meme-card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    overflow: hidden; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .meme-card:hover { transform: translateY(-5px); border-color: var(--red); box-shadow: 0 12px 40px rgba(224,20,20,0.25); }
+  .meme-thumb {
+    aspect-ratio: 1 / 1; width: 100%; object-fit: cover; display: block;
+    background: linear-gradient(180deg, #1a0808, #070404);
+  }
+  /* placeholder shown until real memes are dropped in */
+  .meme-thumb-ph {
+    aspect-ratio: 1 / 1; width: 100%;
+    display: grid; place-content: center; gap: 0.5rem; text-align: center;
+    background:
+      radial-gradient(220px 140px at 50% 45%, rgba(224,20,20,0.22), transparent),
+      linear-gradient(180deg, #1a0808, #070404);
+    color: var(--ash);
+  }
+  .meme-thumb-ph .emoji { font-size: 3rem; filter: drop-shadow(0 0 10px var(--red-glow)); }
+  .meme-thumb-ph small { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+  .meme-card .meme-foot {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+    padding: 0.9rem 1rem; border-top: 1px solid var(--line);
+  }
+  .meme-card .meme-name { font-size: 0.85rem; color: var(--ash); letter-spacing: 0.04em; }
+  .meme-dl {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
+    color: #fff; background: var(--red); padding: 0.45rem 0.8rem; border-radius: 5px;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .meme-dl:hover { background: var(--red-dim); }
+  .meme-note {
+    text-align: center; color: #6b5f5c; font-size: 0.85rem; margin-top: 2rem;
+  }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner {
+    text-align: center;
+    background: linear-gradient(180deg, rgba(224,20,20,0.12), rgba(7,4,4,0.6));
+    border: 1px solid var(--line); border-radius: 16px;
+    padding: 4rem 2rem; margin: 2rem 0;
+  }
+  .cta-banner h2 { font-size: clamp(2.4rem, 7vw, 5rem); margin-bottom: 1rem; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 3rem 0 4rem; text-align: center; }
+  .socials { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.6rem; flex-wrap: wrap; }
+  .socials a {
+    width: 46px; height: 46px; border-radius: 50%;
+    border: 1px solid var(--line); display: grid; place-content: center;
+    color: var(--ash); transition: all 0.2s; font-size: 1.1rem;
+  }
+  .socials a:hover { border-color: var(--red); color: #fff; box-shadow: 0 0 20px var(--red-glow); transform: translateY(-3px); }
+  .disclaimer { color: #6b5f5c; font-size: 0.78rem; max-width: 720px; margin: 1.4rem auto 0; line-height: 1.6; }
+  .foot-brand { font-family: 'Anton', sans-serif; font-size: 2rem; margin-bottom: 0.6rem; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* toast */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--red); color: #fff; padding: 0.8rem 1.5rem; border-radius: 6px;
+    font-weight: 600; letter-spacing: 0.05em; opacity: 0; pointer-events: none;
+    transition: all 0.3s; z-index: 100; box-shadow: 0 8px 30px var(--red-glow);
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand"><span class="bull">🐂</span> $TORO</div>
+    <div class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#how">How It Works</a>
+      <a href="#unlocks">Unlocks</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#memes">Memes</a>
+      <a href="#buy">Buy</a>
+      <a href="#buy" class="btn">Buy $TORO</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <!-- Drop your banner into assets/hero-banner.png. Fallback shows if it's missing. -->
+    <img class="hero-banner" src="assets/hero-banner.png" alt="The Community Bull"
+         onerror="this.outerHTML='<div class=&quot;hero-banner-fallback&quot;><span class=&quot;big&quot;>🐂</span><span>Drop your banner at assets/hero-banner.png</span></div>'" />
+
+    <h1 class="glow-text">The Community <span class="red">Bull</span>
+      <span class="sub">$TORO</span>
+    </h1>
+    <p class="tagline">
+      We have the Black Bull. We have the White Bull.
+      <br><strong>But what if the community decided when the bull ran?</strong>
+    </p>
+
+    <div class="hero-cta">
+      <a href="#buy" class="btn">🐂 Buy $TORO</a>
+      <a href="#unlocks" class="btn ghost">View Unlock Schedule</a>
+    </div>
+
+    <div class="ca-bar">
+      <span class="label">CA</span>
+      <code id="ca-text">2rovxjbNfyVuTdDTpH3EtsWEFJKCmYasuLud3MRHpump</code>
+      <button onclick="copyCA()">Copy</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STORY ============ -->
+<section id="story">
+  <div class="wrap center">
+    <div class="eyebrow">The Legend</div>
+    <h2 class="section-title">Three Bulls Enter</h2>
+    <p class="section-lead">$ANSEM ran the Black Bull. $LEVI ran the White Bull. Both had one fatal flaw — a single hand controlling the airdrops. $TORO fixes it.</p>
+
+    <div class="bulls">
+      <div class="bull-card reveal">
+        <span class="emoji">🖤</span>
+        <h3>The Black Bull</h3>
+        <p>$ANSEM. Loud, early, iconic — but the airdrops were controlled by one person.</p>
+        <span class="flaw">✕ One hand on the trigger</span>
+      </div>
+      <div class="bull-card reveal">
+        <span class="emoji">🤍</span>
+        <h3>The White Bull</h3>
+        <p>$LEVI. Same meta, same story. Distribution decided behind closed doors.</p>
+        <span class="flaw">✕ One hand on the trigger</span>
+      </div>
+      <div class="bull-card highlight reveal">
+        <span class="emoji">🐂</span>
+        <h3>The Community Bull</h3>
+        <p>$TORO. Unlocks are triggered by <strong>market cap milestones</strong> — not by any one person's whim.</p>
+        <span class="flaw" style="color:#5bd15b">✓ The market pulls the trigger</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow">The Mechanism</div>
+      <h2 class="section-title">How The Bull Runs</h2>
+      <p class="section-lead center">65% of the supply was purchased up front and locked via Streamflow. It only unlocks as $TORO climbs — and every unlock goes straight to holders.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <h3>Locked Up Front</h3>
+        <p>65% of total supply was bought and locked in Streamflow. No stealth dumps, no hidden team wallet drip.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <h3>Milestones Trigger</h3>
+        <p>Each market cap milestone releases a fixed slice of supply. The higher the cap, the more unlocks.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <h3>Airdropped To Holders</h3>
+        <p>Every unlocked allocation is airdropped directly to the community. Hold the bull, catch the drop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UNLOCK LADDER ============ -->
+<section id="unlocks">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow">The Ascent</div>
+      <h2 class="section-title">Unlock Schedule</h2>
+      <p class="section-lead center">Eight milestones. 65% of supply released to the community as the bull charges up the chart.</p>
+    </div>
+
+    <div class="ladder" id="ladder">
+      <!-- pct values are relative bar widths scaled to the 15% max for visual weight -->
+      <div class="rung reveal"><span class="mc">$5M</span><div class="bar-track"><div class="bar-fill" data-w="33"></div></div><span class="pct">5%</span></div>
+      <div class="rung reveal"><span class="mc">$10M</span><div class="bar-track"><div class="bar-fill" data-w="33"></div></div><span class="pct">5%</span></div>
+      <div class="rung reveal"><span class="mc">$25M</span><div class="bar-track"><div class="bar-fill" data-w="33"></div></div><span class="pct">5%</span></div>
+      <div class="rung reveal"><span class="mc">$50M</span><div class="bar-track"><div class="bar-fill" data-w="33"></div></div><span class="pct">5%</span></div>
+      <div class="rung reveal"><span class="mc">$100M</span><div class="bar-track"><div class="bar-fill" data-w="66"></div></div><span class="pct">10%</span></div>
+      <div class="rung reveal"><span class="mc">$200M</span><div class="bar-track"><div class="bar-fill" data-w="66"></div></div><span class="pct">10%</span></div>
+      <div class="rung reveal"><span class="mc">$400M</span><div class="bar-track"><div class="bar-fill" data-w="66"></div></div><span class="pct">10%</span></div>
+      <div class="rung reveal"><span class="mc">$800M</span><div class="bar-track"><div class="bar-fill" data-w="100"></div></div><span class="pct">15%</span></div>
+    </div>
+
+    <p class="ladder-total"><strong>65%</strong> of total supply airdropped to holders across the run.</p>
+  </div>
+</section>
+
+<!-- ============ TOKENOMICS ============ -->
+<section id="tokenomics">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow">Under The Hood</div>
+      <h2 class="section-title">Tokenomics</h2>
+    </div>
+
+    <div class="tok-grid">
+      <div class="tok-stats">
+        <div class="tok-stat reveal"><span class="k">Total Supply</span><span class="v">1,000,000,000</span></div>
+        <div class="tok-stat reveal"><span class="k">Community Locked</span><span class="v red">65%</span></div>
+        <div class="tok-stat reveal"><span class="k">Circulating / Liquidity</span><span class="v">35%</span></div>
+        <div class="tok-stat reveal"><span class="k">Unlock Trigger</span><span class="v">Market Cap</span></div>
+        <div class="tok-stat reveal"><span class="k">Lock Provider</span><span class="v">Streamflow</span></div>
+        <div class="tok-stat reveal"><span class="k">Chain</span><span class="v">Solana</span></div>
+      </div>
+
+      <div class="donut-wrap reveal">
+        <div class="donut">
+          <div class="center-lbl">
+            <div class="big">65%</div>
+            <div class="small">Locked for<br>the community</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--red)"></i> Community locked · 65%</span>
+          <span><i style="background:#3a1414"></i> Liquidity · 25%</span>
+          <span><i style="background:#241010"></i> Circulating · 10%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEES ============ -->
+<section id="fees">
+  <div class="wrap center">
+    <div class="eyebrow">Aligned Incentives</div>
+    <h2 class="section-title">Fees Feed The Herd</h2>
+    <p class="section-lead center">Creator fees won't be pocketed. They're used to strengthen the project — adding liquidity when it makes sense, and randomly airdropping SOL to loyal holders and active community members.</p>
+    <div class="steps" style="margin-top:2.5rem">
+      <div class="step reveal"><span class="num">💧</span><h3>Deepen Liquidity</h3><p>Fees are recycled into the pool when appropriate to keep the floor solid.</p></div>
+      <div class="step reveal"><span class="num">🎁</span><h3>SOL Airdrops</h3><p>Random SOL drops to loyal holders and active community members.</p></div>
+      <div class="step reveal"><span class="num">🐂</span><h3>Grow The Herd</h3><p>Every fee decision is aimed at strengthening $TORO, not draining it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO BUY ============ -->
+<section id="buy">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow">Join The Herd</div>
+      <h2 class="section-title">How To Buy</h2>
+    </div>
+
+    <div class="buy-steps">
+      <div class="buy-step reveal">
+        <div>
+          <h3>Get a Solana Wallet</h3>
+          <p>Download <a href="https://phantom.app" target="_blank" rel="noopener">Phantom</a> or <a href="https://solflare.com" target="_blank" rel="noopener">Solflare</a> and fund it with SOL from any exchange.</p>
+        </div>
+      </div>
+      <div class="buy-step reveal">
+        <div>
+          <h3>Copy the Contract Address</h3>
+          <p>Grab the official $TORO CA from the top of this page (or the button below). Only trust the address listed here.</p>
+        </div>
+      </div>
+      <div class="buy-step reveal">
+        <div>
+          <h3>Swap on Jupiter or Raydium</h3>
+          <p>Head to <a href="https://jup.ag/swap/SOL-2rovxjbNfyVuTdDTpH3EtsWEFJKCmYasuLud3MRHpump" target="_blank" rel="noopener">Jupiter</a>, paste the CA, and swap your SOL for $TORO.</p>
+        </div>
+      </div>
+      <div class="buy-step reveal">
+        <div>
+          <h3>Hold &amp; Catch the Drops</h3>
+          <p>Hold $TORO. As milestones hit, unlocked supply is airdropped straight to holders.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEME ARSENAL ============ -->
+<section id="memes">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow">Weapons Of Mass Adoption</div>
+      <h2 class="section-title">Meme Arsenal</h2>
+      <p class="section-lead center">The bull runs on memes. Grab 'em, post 'em, spread the herd. Right-click or hit download and take them everywhere.</p>
+    </div>
+
+    <!--
+      TO ADD YOUR MEMES:
+      1. Drop image files into  assets/memes/  (e.g. meme-1.png, meme-2.jpg)
+      2. In each card below, set the <img src> and the download <a href> to that file.
+      3. Delete the placeholder <div class="meme-thumb-ph"> and uncomment the <img>.
+      Duplicate a card block for as many memes as you have.
+    -->
+    <div class="meme-grid" id="meme-grid">
+
+      <div class="meme-card reveal">
+        <!-- <img class="meme-thumb" src="assets/memes/meme-1.png" alt="TORO meme"> -->
+        <div class="meme-thumb-ph"><span class="emoji">🐂</span><small>Meme #1</small></div>
+        <div class="meme-foot">
+          <span class="meme-name">toro-meme-1</span>
+          <a class="meme-dl" href="assets/memes/meme-1.png" download>⬇ Save</a>
+        </div>
+      </div>
+
+      <div class="meme-card reveal">
+        <div class="meme-thumb-ph"><span class="emoji">🔴</span><small>Meme #2</small></div>
+        <div class="meme-foot">
+          <span class="meme-name">toro-meme-2</span>
+          <a class="meme-dl" href="assets/memes/meme-2.png" download>⬇ Save</a>
+        </div>
+      </div>
+
+      <div class="meme-card reveal">
+        <div class="meme-thumb-ph"><span class="emoji">🐂</span><small>Meme #3</small></div>
+        <div class="meme-foot">
+          <span class="meme-name">toro-meme-3</span>
+          <a class="meme-dl" href="assets/memes/meme-3.png" download>⬇ Save</a>
+        </div>
+      </div>
+
+      <div class="meme-card reveal">
+        <div class="meme-thumb-ph"><span class="emoji">🔥</span><small>Meme #4</small></div>
+        <div class="meme-foot">
+          <span class="meme-name">toro-meme-4</span>
+          <a class="meme-dl" href="assets/memes/meme-4.png" download>⬇ Save</a>
+        </div>
+      </div>
+
+      <div class="meme-card reveal">
+        <div class="meme-thumb-ph"><span class="emoji">🐂</span><small>Meme #5</small></div>
+        <div class="meme-foot">
+          <span class="meme-name">toro-meme-5</span>
+          <a class="meme-dl" href="assets/memes/meme-5.png" download>⬇ Save</a>
+        </div>
+      </div>
+
+      <div class="meme-card reveal">
+        <div class="meme-thumb-ph"><span class="emoji">💥</span><small>Meme #6</small></div>
+        <div class="meme-foot">
+          <span class="meme-name">toro-meme-6</span>
+          <a class="meme-dl" href="assets/memes/meme-6.png" download>⬇ Save</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section>
+  <div class="wrap">
+    <div class="cta-banner reveal">
+      <h2 class="glow-text">Run With The Herd</h2>
+      <p class="section-lead center" style="margin-bottom:2rem">The community decides how far this bull runs. Grab your $TORO and hold the line.</p>
+      <div class="hero-cta">
+        <a href="#" onclick="copyCA();return false;" class="btn">📋 Copy Contract</a>
+        <a href="https://jup.ag/swap/SOL-2rovxjbNfyVuTdDTpH3EtsWEFJKCmYasuLud3MRHpump" target="_blank" rel="noopener" class="btn ghost">Buy on Jupiter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">🐂 $TORO</div>
+    <div class="socials">
+      <a href="https://x.com/ToroTheBull_Sol" title="X / Twitter" target="_blank" rel="noopener">𝕏</a>
+      <a href="https://dexscreener.com/solana/2rovxjbNfyVuTdDTpH3EtsWEFJKCmYasuLud3MRHpump" title="DexScreener" target="_blank" rel="noopener">📈</a>
+    </div>
+    <p class="disclaimer">
+      $TORO is a community meme coin with no intrinsic value or expectation of financial return. There is no formal team, roadmap guarantee, or promise of profit. Crypto assets are highly volatile and you may lose everything. Nothing on this site is financial advice. Do your own research. Never invest more than you can afford to lose.
+    </p>
+  </div>
+</footer>
+
+<div id="toast">Contract address copied 🐂</div>
+
+<script>
+  // Copy contract address
+  function copyCA() {
+    const ca = document.getElementById('ca-text').textContent.trim();
+    navigator.clipboard.writeText(ca).then(showToast).catch(showToast);
+  }
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Animate unlock bars when the ladder scrolls into view
+  const ladder = document.getElementById('ladder');
+  const barIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        ladder.querySelectorAll('.bar-fill').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, i * 120);
+        });
+        barIO.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  if (ladder) barIO.observe(ladder);
+</script>
+</body>
+</html>
